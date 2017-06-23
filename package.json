@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "React redux boilerplate",
   "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "./node_modules/.bin/webpack-dev-server --inline --hot"
+  },
   "author": "Matthew Gordon <laxredemption5525@gmail.com>",
   "license": "MIT",
   "devDependencies": {
