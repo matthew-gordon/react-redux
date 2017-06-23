@@ -2,10 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-// import logger from 'redux-logger';
-import {
-  BrowserRouter as Router,
-} from 'react-router-dom';
 
 import App from './components/app';
 import reducers from './reducers';
@@ -14,8 +10,6 @@ const store = applyMiddleware()(createStore);
 
 ReactDOM.render(
   <Provider store={store(reducers)}>
-    <Router>
-      <App />
-    </Router>
+    <App />
   </Provider>
   , document.getElementById('root'));
