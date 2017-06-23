@@ -7,7 +7,7 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom';
 
-import App from './components/App';
+import App from './components/app';
 import reducers from './reducers';
 
 const store = applyMiddleware()(createStore);
