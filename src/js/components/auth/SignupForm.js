@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 class SignupForm extends Component {
-  handleSubmitForm(values) {
-
-    console.log(values);
-  }
-
   render() {
     return (
-      <form onSubmit={ this.props.handleSubmit(this.handleSubmitForm) }>
+      <form onSubmit={ this.props.handleSubmit }>
         <div>
           <label htmlFor="firstName">Name</label>
           <Field name="firstName" component="input" type="text" />
