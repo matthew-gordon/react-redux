@@ -1,10 +1,30 @@
 import axios from 'axios';
 import {
   AUTH_USER,
+  UNAUTH_USER,
   AUTH_ERROR
 } from './types';
 
 const ROOT_URL = 'http://localhost:3000'; // TODO: Move into signinUser
+
+export function signupUser(values, callback) {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/auth/register`, values)
+      .then(response => {
+        //If request is good...
+        //- Update state to indicate user is authenticated
+        dispatch({ type: AUTH_USER });
+        //- Save the JWT token to local storage
+        localStorage.setItem('token', response.data.token);
+        //- redirect to the route '/dashboard'
+        callback();
+      })
+      .catch(() => {
+        dispatch(authError('Bad Signup Info'))
+      }
+    );
+  }
+}
 
 export function signinUser(values, callback) {
   return (dispatch) => {
@@ -33,4 +53,10 @@ export function authError(error) {
     type: AUTH_ERROR,
     payload: error
   };
+}
+
+export function signoutUser() {
+  localStorage.removeItem('token');
+
+  return { type: UNAUTH_USER }
 }

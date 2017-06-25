@@ -1,49 +1,96 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
-class SignupForm extends Component {
-  render() {
-    return (
-      <form onSubmit={ this.props.handleSubmit }>
-        <fieldset className="form-group">
-        <div>
-          <label htmlFor="firstName">Name</label>
-          <Field
-            name="firstName"
-            component="input"
-            type="text"
-            className="form-control"/>
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error, warning }
+}) => (
+  <fieldset className="form-group">
+    <label htmlFor={input.name}>{label}</label>
+    <input className="form-control" {...input} type={type}/>
+    { touched && error && <span className="text-danger">{error}</span> }
+  </fieldset>
+);
+
+class SignUpForm extends Component {
+
+  submit(values) {
+    this.props.signupUser(values, () => {
+      this.props.history.push('/dashboard');
+    });
+  }
+
+  renderAlert() {
+    if (this.props.errorMessage) {
+      return (
+        <div className="alert alert-danger">
+          <strong>Oops!</strong> {this.props.errorMessage}
         </div>
-        </fieldset>
-        <fieldset className="form-group">
-          <div>
-            <label htmlFor="email">Email</label>
-            <Field
-              name="email"
-              component="input"
-              type="text"
-              className="form-control"/>
-          </div>
-        </fieldset>
-        <fieldset className="form-group">
-          <div>
-            <label htmlFor="password">Password</label>
-            <Field
-              name="password"
-              component="input"
-              type="password"
-              className="form-control"/>
-          </div>
-        </fieldset>
+      )
+    }
+  }
 
-        <button type="submit" className="btn btn-primary">Submit</button>
+  render() {
+    const { handleSubmit } = this.props;
+
+    return (
+      <form onSubmit={handleSubmit(this.submit.bind(this))}>
+        <Field
+          name="username"
+          component={renderField}
+          type="text"
+          label="Username"/>
+        <Field
+          name="password"
+          component={renderField}
+          type="password"
+          label="Password"/>
+        <Field
+          name="password_confirmation"
+          component={renderField}
+          type="password"
+          label="Password Confirmation"/>
+          {this.renderAlert()}
+        <button action="submit" className="btn btn-primary">Submit</button>
       </form>
     );
   }
 }
 
-SignupForm = reduxForm({
-  form: 'signup'
-})(SignupForm)
+function validate(values) {
+  let errors = {}
 
-export default SignupForm;
+  if (!values.username) {
+    errors.username = 'Please enter a usernme';
+  }
+
+  if (!values.password) {
+    errors.password = 'Please enter a password';
+  }
+
+  if (!values.password_confirmation) {
+    errors.password_confirmation = 'Please enter your password confirmation'
+  }
+
+  if (values.password !== values.password_confirmation) {
+    errors.password = 'Password and password confirmation don\'t match!'
+  }
+
+  return errors
+}
+
+function mapStateToProps(state) {
+  return { errorMessage: state.auth.error };
+}
+
+SignUpForm = reduxForm({
+  form: 'signup',
+  validate
+})(SignUpForm)
+
+import { withRouter } from 'react-router-dom'
+export default withRouter(connect(mapStateToProps, actions)(SignUpForm));

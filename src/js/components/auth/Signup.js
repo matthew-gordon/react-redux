@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 import SignupForm from './SignupForm';
 
 export default class SignUp extends Component {
-  handleSignupForm(values) {
-    console.log(values, 'top level');
-  }
-
   render() {
     return (
       <div className="col-md-6 col-md-offset-3">

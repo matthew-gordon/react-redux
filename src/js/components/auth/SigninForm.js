@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-class SigninForm extends Component {
+class SignInForm extends Component {
 
   submit(values) {
     this.props.signinUser(values, () => {
@@ -57,9 +57,9 @@ function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
 }
 
-SigninForm = reduxForm({
+SignInForm = reduxForm({
   form: 'signin'
-})(SigninForm)
+})(SignInForm)
 
 import { withRouter } from 'react-router-dom'
-export default withRouter(connect(mapStateToProps, actions)(SigninForm));
+export default withRouter(connect(mapStateToProps, actions)(SignInForm));

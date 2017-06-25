@@ -3,15 +3,33 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Navbar extends  Component {
+  renderLinks() {
+    if(this.props.authenticated) {
+      // show a link to sign out
+      return (
+        <li className="nav-item">
+          <Link className="nav-link" to="/signout">Sign Out</Link>
+        </li>
+      )
+    } else {
+      //show a link to sign in or sign up
+      return [
+        <li className="nav-item" key={1}>
+          <Link to="/signin">Sign in</Link>
+        </li>,
+        <li className="nav-item" key={2}>
+          <Link to="/signup">Sign up</Link>
+        </li>
+      ];
+    }
+  }
 
   render() {
-    console.log(this.props);
     return (
       <nav className="navbar navbar-light">
       <Link to="/" className="navbar-brand">Redux Auth</Link>
         <ul className="nav navbar-nav pull-right">
-          <li className="nav-item"><Link to="/signup">Sign up</Link></li>
-          <li className="nav-item"><Link to="/signin">Sign in</Link></li>
+          {this.renderLinks()}
         </ul>
       </nav>
     );
@@ -20,8 +38,8 @@ class Navbar extends  Component {
 
 function mapStateToProps(state) {
   return {
-    authenticcated: state.auth.authenticated
+    authenticated: state.auth.authenticated
   }
 }
 
-export default connect()(Navbar);
+export default connect(mapStateToProps)(Navbar);

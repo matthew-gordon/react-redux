@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as actions from '../../actions';
 
 import SigninForm from './SigninForm';
 
