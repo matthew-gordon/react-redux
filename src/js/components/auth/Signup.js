@@ -10,7 +10,7 @@ export default class SignUp extends Component {
 
   render() {
     return (
-      <div>
+      <div className="col-md-6 col-md-offset-3">
         <h1>Sign up</h1>
           <SignupForm onSubmit={this.handleSignupForm}/>
         <Link to="/">Back Home</Link>
