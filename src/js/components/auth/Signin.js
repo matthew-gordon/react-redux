@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom';
 import SigninForm from './SigninForm';
 
 export default class SignIn extends Component {
-  handleSigninForm(values) {
-    console.log(values, 'top level');
+  submit(values) {
+
+    actions.signinUser(values);
   }
 
   render() {
     return (
       <div>
         <h1>Sign in</h1>
-          <SigninForm onSubmit={this.handleSigninForm} />
+        <SigninForm />
         <Link to="/">Back Home</Link>
       </div>
     );
