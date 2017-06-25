@@ -1,9 +1,8 @@
-import { Redirect } from 'react-router';
 import axios from 'axios';
 
 const ROOT_URL = 'http://localhost:3000';
 
-export function signinUser(values) {
+export const signinUser = (values, callback) => {
   return function(dispatch) {
     // Submit email/password to the server
     axios.post(`${ROOT_URL}/auth/login`, values)
@@ -12,7 +11,7 @@ export function signinUser(values) {
         //- Update state to indicate user is authenticated
         //- Save the JWT token
         //- redirect to the route '/dashboard'
-        this.props.history.push('/');
+        callback();
       })
       .catch(() => {
         //If request is bad...
