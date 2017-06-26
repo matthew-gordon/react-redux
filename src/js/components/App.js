@@ -9,6 +9,7 @@ import SignIn from './auth/SignIn';
 import SignUp from './auth/SignUp';
 import SignOut from './auth/SignOut';
 import Home from './home/Home';
+import RequireAuth from './auth/require_auth';
 import Navbar from './navbar/Navbar';
 
 export default class App extends Component {
@@ -21,7 +22,7 @@ export default class App extends Component {
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/signout" component={SignOut} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard" component={RequireAuth(Dashboard)} />
         </Switch>
       </div>
     );
