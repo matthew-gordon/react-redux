@@ -2,25 +2,41 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions'
 
+
 class Dashboard extends Component {
   componentWillMount() {
-    this.props.fetchUsersRoute();
+    this.props.fetchUser();
   }
 
-  getUserInfo() {
-    console.log(localStorage.token);
+  renderUser() {
+    if (this.props.user && this.props.user.username) {
+      return (
+        <div className="container">
+          <h1>hello {this.props.user.username}</h1>
+        </div>
+      );
+    } else {
+      return (
+        <div className="container">
+          <h3>Loading...</h3>
+        </div>
+      );
+    }
   }
 
   render() {
-    console.log(this.props);
     return (
-      <h1>{this.props.message}</h1>
+      <div>
+        {this.renderUser()}
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { message: state.auth.message };
+  return {
+    user: state.auth.user
+  };
 }
 
 export default connect(mapStateToProps, actions)(Dashboard);

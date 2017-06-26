@@ -64,7 +64,7 @@ export function signoutUser() {
   return { type: UNAUTH_USER }
 }
 
-export function fetchUsersRoute() {
+export function fetchUser() {
   return function(dispatch) {
     axios.get(`${ROOT_URL}/auth/user`, {
       headers: { authorization: 'Bearer ' + localStorage.getItem('token') }
@@ -72,7 +72,7 @@ export function fetchUsersRoute() {
       .then(response => {
         dispatch({
           type: FETCH_MESSAGE,
-          payload: response.data.status
+          payload: response.data.user
         });
       }
     );
