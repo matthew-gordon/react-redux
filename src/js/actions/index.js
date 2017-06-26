@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
   AUTH_USER,
   UNAUTH_USER,
-  AUTH_ERROR
+  AUTH_ERROR,
+  FETCH_MESSAGE
 } from './types';
 
 const ROOT_URL = 'http://localhost:3000'; // TODO: Move into signinUser
@@ -20,7 +21,9 @@ export function signupUser(values, callback) {
         callback();
       })
       .catch(() => {
-        dispatch(authError('Bad Signup Info'))
+        //If request is bad...
+        //- Show an error to the user
+        dispatch(authError('Bad Signup Info'));
       }
     );
   }
@@ -59,4 +62,19 @@ export function signoutUser() {
   localStorage.removeItem('token');
 
   return { type: UNAUTH_USER }
+}
+
+export function fetchUsersRoute() {
+  return function(dispatch) {
+    axios.get(`${ROOT_URL}/auth/user`, {
+      headers: { authorization: 'Bearer ' + localStorage.getItem('token') }
+    })
+      .then(response => {
+        dispatch({
+          type: FETCH_MESSAGE,
+          payload: response.data.status
+        });
+      }
+    );
+  }
 }

@@ -27,7 +27,7 @@ class Navbar extends  Component {
   render() {
     return (
       <nav className="navbar navbar-light">
-      <Link to="/" className="navbar-brand">Redux Auth</Link>
+      <Link to="/" className="navbar-brand">Glass-house</Link>
         <ul className="nav navbar-nav pull-right">
           {this.renderLinks()}
         </ul>
