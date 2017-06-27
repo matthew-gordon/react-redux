@@ -7,7 +7,7 @@ module.exports = {
   entry: path.join(__dirname, '/src/js/index.js'),
   module: {
     loaders: [{
-      test:/\.jsx?$/,
+      test:/\.js?$/,
       exclude: /node_modules/,
       loader: 'babel-loader',
       query: {

@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "test:dev": "jest --watchAll",
-    "coverage": "jest --coverage",
-    "update": "jest -- -u",
+    "test:coverage": "jest --coverage",
+    "test:update": "jest -- -u",
     "dev": "./node_modules/.bin/webpack-dev-server --inline --hot"
   },
   "author": "Matthew Gordon <laxredemption5525@gmail.com>",
