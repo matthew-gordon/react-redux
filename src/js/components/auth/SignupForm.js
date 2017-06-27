@@ -16,7 +16,7 @@ const renderField = ({
   </fieldset>
 );
 
-class SignUpForm extends Component {
+export class SignUpForm extends Component {
 
   submit(values) {
     this.props.signupUser(values, () => {

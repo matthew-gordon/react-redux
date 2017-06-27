@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-class SignInForm extends Component {
+export class SignInForm extends Component {
 
   submit(values) {
     this.props.signinUser(values, () => {

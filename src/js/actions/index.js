@@ -59,7 +59,9 @@ export function authError(error) {
 }
 
 export function signoutUser() {
-  localStorage.removeItem('token');
+  if (process.env.NODE_ENV !== 'test') {
+    localStorage.removeItem('token');
+  }
 
   return { type: UNAUTH_USER }
 }

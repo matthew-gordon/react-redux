@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-class Navbar extends  Component {
+export class Navbar extends  Component {
   renderLinks() {
     if(this.props.authenticated) {
       // show links to sign out or goto dashboard
