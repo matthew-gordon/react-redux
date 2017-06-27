@@ -3,7 +3,7 @@ import {
   AUTH_USER,
   UNAUTH_USER,
   AUTH_ERROR,
-  FETCH_MESSAGE
+  FETCH_USER
 } from './types';
 
 const ROOT_URL = 'http://localhost:3000'; // TODO: Move into signinUser
@@ -69,12 +69,11 @@ export function fetchUser() {
     axios.get(`${ROOT_URL}/auth/user`, {
       headers: { authorization: 'Bearer ' + localStorage.getItem('token') }
     })
-      .then(response => {
-        dispatch({
-          type: FETCH_MESSAGE,
-          payload: response.data.user
-        });
-      }
-    );
+    .then(response => {
+      dispatch({
+        type: FETCH_USER,
+        payload: response.data.user
+      });
+    });
   }
 }

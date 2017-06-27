@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class Navbar extends  Component {
   renderLinks() {
     if(this.props.authenticated) {
-      // show a link to sign out
+      // show links to sign out or goto dashboard
       return [
         <li className="nav-item" key={1}>
           <Link className="nav-link" to="/dashboard">Dashboard</Link>
@@ -15,7 +15,7 @@ class Navbar extends  Component {
         </li>
       ]
     } else {
-      //show a link to sign in or sign up
+      //show links to sign in or sign up
       return [
         <li className="nav-item" key={1}>
           <Link to="/signin">Sign in</Link>
